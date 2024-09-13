@@ -1,0 +1,10 @@
+Z:\lab4_WF_2212387\obj\Debug\lab4_WF_2212387.csproj.AssemblyReference.cache
+Z:\lab4_WF_2212387\obj\Debug\lab4_WF_2212387.Properties.Resources.resources
+Z:\lab4_WF_2212387\obj\Debug\lab4_WF_2212387.csproj.GenerateResource.cache
+Z:\lab4_WF_2212387\obj\Debug\lab4_WF_2212387.csproj.CoreCompileInputs.cache
+Z:\lab4_WF_2212387\bin\Debug\lab4_WF_2212387.exe.config
+Z:\lab4_WF_2212387\bin\Debug\lab4_WF_2212387.exe
+Z:\lab4_WF_2212387\bin\Debug\lab4_WF_2212387.pdb
+Z:\lab4_WF_2212387\obj\Debug\lab4_WF_2212387.exe
+Z:\lab4_WF_2212387\obj\Debug\lab4_WF_2212387.pdb
+Z:\lab4_WF_2212387\obj\Debug\lab4_WF_2212387.frmChinh.resources
