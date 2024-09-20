@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace lab4_WF_2212387
 {
     //khai bapo delegate so sanh
-     class QuanLySinhVien:frmChinh
+     class QuanLySinhVien
     {
         public ArrayList dssv;
         public QuanLySinhVien()

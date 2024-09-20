@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-
+using System.Drawing;
+using System.IO;
 namespace lab4_WF_2212387
 {
     public partial class frmChinh : Form
@@ -8,8 +9,8 @@ namespace lab4_WF_2212387
         public frmChinh()
         {
             InitializeComponent();
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
         }
-        private Panel panel1;
         private Label label6;
         private Label label9;
         private Label label8;
@@ -45,35 +46,35 @@ namespace lab4_WF_2212387
         private ColumnHeader columnHeader8;
         private ColumnHeader columnHeader9;
         private OpenFileDialog openFileDialog1;
+        private PictureBox pictureBox1;
         private GroupBox grbThongTin;
 
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.grbThongTin = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.mtbMSSV = new System.Windows.Forms.MaskedTextBox();
-            this.txtHoVaTen = new System.Windows.Forms.TextBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtDiaChi = new System.Windows.Forms.TextBox();
-            this.txtHinh = new System.Windows.Forms.TextBox();
-            this.dtpNgaySinh = new System.Windows.Forms.DateTimePicker();
-            this.rdNam = new System.Windows.Forms.RadioButton();
-            this.rdNu = new System.Windows.Forms.RadioButton();
-            this.mtbSDT = new System.Windows.Forms.MaskedTextBox();
-            this.cbLop = new System.Windows.Forms.ComboBox();
-            this.btnChonHinh = new System.Windows.Forms.Button();
-            this.btnMacDinh = new System.Windows.Forms.Button();
-            this.btnLuu = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
+            this.btnLuu = new System.Windows.Forms.Button();
+            this.btnMacDinh = new System.Windows.Forms.Button();
+            this.btnChonHinh = new System.Windows.Forms.Button();
+            this.cbLop = new System.Windows.Forms.ComboBox();
+            this.mtbSDT = new System.Windows.Forms.MaskedTextBox();
+            this.rdNu = new System.Windows.Forms.RadioButton();
+            this.rdNam = new System.Windows.Forms.RadioButton();
+            this.dtpNgaySinh = new System.Windows.Forms.DateTimePicker();
+            this.txtHinh = new System.Windows.Forms.TextBox();
+            this.txtDiaChi = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtHoVaTen = new System.Windows.Forms.TextBox();
+            this.mtbMSSV = new System.Windows.Forms.MaskedTextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.grbDSSV = new System.Windows.Forms.GroupBox();
             this.lvSinhVien = new System.Windows.Forms.ListView();
             this.MSSV = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -86,16 +87,11 @@ namespace lab4_WF_2212387
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.grbThongTin.SuspendLayout();
             this.grbDSSV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(170, 212);
-            this.panel1.TabIndex = 0;
             // 
             // grbThongTin
             // 
@@ -129,134 +125,75 @@ namespace lab4_WF_2212387
             this.grbThongTin.TabStop = false;
             this.grbThongTin.Text = "Thông tin sinh viên";
             // 
-            // label1
+            // btnThoat
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "MSSV";
+            this.btnThoat.Location = new System.Drawing.Point(618, 183);
+            this.btnThoat.Name = "btnThoat";
+            this.btnThoat.Size = new System.Drawing.Size(93, 23);
+            this.btnThoat.TabIndex = 12;
+            this.btnThoat.Text = "Thoát";
+            this.btnThoat.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // btnLuu
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Họ và tên";
+            this.btnLuu.Location = new System.Drawing.Point(510, 183);
+            this.btnLuu.Name = "btnLuu";
+            this.btnLuu.Size = new System.Drawing.Size(93, 23);
+            this.btnLuu.TabIndex = 11;
+            this.btnLuu.Text = "Lưu";
+            this.btnLuu.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // btnMacDinh
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 92);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Email";
+            this.btnMacDinh.Location = new System.Drawing.Point(400, 183);
+            this.btnMacDinh.Name = "btnMacDinh";
+            this.btnMacDinh.Size = new System.Drawing.Size(93, 23);
+            this.btnMacDinh.TabIndex = 10;
+            this.btnMacDinh.Text = "Mặc định";
+            this.btnMacDinh.UseVisualStyleBackColor = true;
+            this.btnMacDinh.Click += new System.EventHandler(this.btnMacDinh_Click);
             // 
-            // label4
+            // btnChonHinh
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 128);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Địa chỉ";
+            this.btnChonHinh.Location = new System.Drawing.Point(636, 155);
+            this.btnChonHinh.Name = "btnChonHinh";
+            this.btnChonHinh.Size = new System.Drawing.Size(75, 23);
+            this.btnChonHinh.TabIndex = 9;
+            this.btnChonHinh.Text = "Chọn hình";
+            this.btnChonHinh.UseVisualStyleBackColor = true;
+            this.btnChonHinh.Click += new System.EventHandler(this.btnChonHinh_Click);
             // 
-            // label5
+            // cbLop
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(397, 29);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Ngày sinh";
+            this.cbLop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLop.Items.AddRange(new object[] {
+            "CTK46B",
+            "CTK46A"});
+            this.cbLop.Location = new System.Drawing.Point(473, 92);
+            this.cbLop.Name = "cbLop";
+            this.cbLop.Size = new System.Drawing.Size(220, 21);
+            this.cbLop.TabIndex = 7;
+            this.cbLop.SelectedIndexChanged += new System.EventHandler(this.cbLop_SelectedIndexChanged);
             // 
-            // label6
+            // mtbSDT
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 160);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Hình";
+            this.mtbSDT.Location = new System.Drawing.Point(473, 128);
+            this.mtbSDT.Mask = "(999) 000-0000";
+            this.mtbSDT.Name = "mtbSDT";
+            this.mtbSDT.Size = new System.Drawing.Size(220, 20);
+            this.mtbSDT.TabIndex = 8;
+            this.mtbSDT.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbSDT_MaskInputRejected);
             // 
-            // label7
+            // rdNu
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(397, 59);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(28, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Phái";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(397, 92);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(25, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Lớp";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(397, 128);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(70, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Số điện thoại";
-            // 
-            // mtbMSSV
-            // 
-            this.mtbMSSV.Location = new System.Drawing.Point(67, 21);
-            this.mtbMSSV.Mask = "0000000";
-            this.mtbMSSV.Name = "mtbMSSV";
-            this.mtbMSSV.Size = new System.Drawing.Size(307, 20);
-            this.mtbMSSV.TabIndex = 0;
-            this.mtbMSSV.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbMSSV_MaskInputRejected);
-            // 
-            // txtHoVaTen
-            // 
-            this.txtHoVaTen.Location = new System.Drawing.Point(67, 59);
-            this.txtHoVaTen.Name = "txtHoVaTen";
-            this.txtHoVaTen.Size = new System.Drawing.Size(307, 20);
-            this.txtHoVaTen.TabIndex = 1;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(67, 89);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(307, 20);
-            this.txtEmail.TabIndex = 2;
-            // 
-            // txtDiaChi
-            // 
-            this.txtDiaChi.Location = new System.Drawing.Point(67, 121);
-            this.txtDiaChi.Name = "txtDiaChi";
-            this.txtDiaChi.Size = new System.Drawing.Size(307, 20);
-            this.txtDiaChi.TabIndex = 3;
-            // 
-            // txtHinh
-            // 
-            this.txtHinh.Location = new System.Drawing.Point(67, 157);
-            this.txtHinh.Name = "txtHinh";
-            this.txtHinh.ReadOnly = true;
-            this.txtHinh.Size = new System.Drawing.Size(563, 20);
-            this.txtHinh.TabIndex = 13;
-            this.txtHinh.TextChanged += new System.EventHandler(this.txtHinh_TextChanged);
-            // 
-            // dtpNgaySinh
-            // 
-            this.dtpNgaySinh.CustomFormat = "dd/mm/yyyy";
-            this.dtpNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpNgaySinh.Location = new System.Drawing.Point(457, 23);
-            this.dtpNgaySinh.Name = "dtpNgaySinh";
-            this.dtpNgaySinh.Size = new System.Drawing.Size(236, 20);
-            this.dtpNgaySinh.TabIndex = 4;
+            this.rdNu.AutoSize = true;
+            this.rdNu.Location = new System.Drawing.Point(510, 62);
+            this.rdNu.Name = "rdNu";
+            this.rdNu.Size = new System.Drawing.Size(39, 17);
+            this.rdNu.TabIndex = 6;
+            this.rdNu.Text = "Nữ";
+            this.rdNu.UseVisualStyleBackColor = true;
+            this.rdNu.CheckedChanged += new System.EventHandler(this.rdNu_CheckedChanged);
             // 
             // rdNam
             // 
@@ -270,72 +207,138 @@ namespace lab4_WF_2212387
             this.rdNam.Text = "Nam";
             this.rdNam.UseVisualStyleBackColor = true;
             // 
-            // rdNu
+            // dtpNgaySinh
             // 
-            this.rdNu.AutoSize = true;
-            this.rdNu.Location = new System.Drawing.Point(510, 62);
-            this.rdNu.Name = "rdNu";
-            this.rdNu.Size = new System.Drawing.Size(39, 17);
-            this.rdNu.TabIndex = 6;
-            this.rdNu.Text = "Nữ";
-            this.rdNu.UseVisualStyleBackColor = true;
-            this.rdNu.CheckedChanged += new System.EventHandler(this.rdNu_CheckedChanged);
+            this.dtpNgaySinh.CustomFormat = "dd/mm/yyyy";
+            this.dtpNgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNgaySinh.Location = new System.Drawing.Point(457, 23);
+            this.dtpNgaySinh.Name = "dtpNgaySinh";
+            this.dtpNgaySinh.Size = new System.Drawing.Size(236, 20);
+            this.dtpNgaySinh.TabIndex = 4;
+            this.dtpNgaySinh.ValueChanged += new System.EventHandler(this.dtpNgaySinh_ValueChanged);
             // 
-            // mtbSDT
+            // txtHinh
             // 
-            this.mtbSDT.Location = new System.Drawing.Point(473, 128);
-            this.mtbSDT.Mask = "(999) 000-0000";
-            this.mtbSDT.Name = "mtbSDT";
-            this.mtbSDT.Size = new System.Drawing.Size(220, 20);
-            this.mtbSDT.TabIndex = 8;
+            this.txtHinh.Location = new System.Drawing.Point(67, 157);
+            this.txtHinh.Name = "txtHinh";
+            this.txtHinh.ReadOnly = true;
+            this.txtHinh.Size = new System.Drawing.Size(563, 20);
+            this.txtHinh.TabIndex = 13;
+            this.txtHinh.TextChanged += new System.EventHandler(this.txtHinh_TextChanged);
             // 
-            // cbLop
+            // txtDiaChi
             // 
-            this.cbLop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLop.Items.AddRange(new object[] {
-            "CTK46B",
-            "CTK46A"});
-            this.cbLop.Location = new System.Drawing.Point(473, 92);
-            this.cbLop.Name = "cbLop";
-            this.cbLop.Size = new System.Drawing.Size(220, 21);
-            this.cbLop.TabIndex = 7;
+            this.txtDiaChi.Location = new System.Drawing.Point(67, 121);
+            this.txtDiaChi.Name = "txtDiaChi";
+            this.txtDiaChi.Size = new System.Drawing.Size(307, 20);
+            this.txtDiaChi.TabIndex = 3;
+            this.txtDiaChi.TextChanged += new System.EventHandler(this.txtDiaChi_TextChanged);
             // 
-            // btnChonHinh
+            // txtEmail
             // 
-            this.btnChonHinh.Location = new System.Drawing.Point(636, 155);
-            this.btnChonHinh.Name = "btnChonHinh";
-            this.btnChonHinh.Size = new System.Drawing.Size(75, 23);
-            this.btnChonHinh.TabIndex = 9;
-            this.btnChonHinh.Text = "Chọn hình";
-            this.btnChonHinh.UseVisualStyleBackColor = true;
-            this.btnChonHinh.Click += new System.EventHandler(this.btnChonHinh_Click);
+            this.txtEmail.Location = new System.Drawing.Point(67, 89);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(307, 20);
+            this.txtEmail.TabIndex = 2;
+            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
-            // btnMacDinh
+            // txtHoVaTen
             // 
-            this.btnMacDinh.Location = new System.Drawing.Point(400, 183);
-            this.btnMacDinh.Name = "btnMacDinh";
-            this.btnMacDinh.Size = new System.Drawing.Size(93, 23);
-            this.btnMacDinh.TabIndex = 10;
-            this.btnMacDinh.Text = "Mặc định";
-            this.btnMacDinh.UseVisualStyleBackColor = true;
+            this.txtHoVaTen.Location = new System.Drawing.Point(67, 59);
+            this.txtHoVaTen.Name = "txtHoVaTen";
+            this.txtHoVaTen.Size = new System.Drawing.Size(307, 20);
+            this.txtHoVaTen.TabIndex = 1;
+            this.txtHoVaTen.TextChanged += new System.EventHandler(this.txtHoVaTen_TextChanged);
             // 
-            // btnLuu
+            // mtbMSSV
             // 
-            this.btnLuu.Location = new System.Drawing.Point(510, 183);
-            this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(93, 23);
-            this.btnLuu.TabIndex = 11;
-            this.btnLuu.Text = "Lưu";
-            this.btnLuu.UseVisualStyleBackColor = true;
+            this.mtbMSSV.Location = new System.Drawing.Point(67, 21);
+            this.mtbMSSV.Mask = "0000000";
+            this.mtbMSSV.Name = "mtbMSSV";
+            this.mtbMSSV.Size = new System.Drawing.Size(307, 20);
+            this.mtbMSSV.TabIndex = 0;
+            this.mtbMSSV.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbMSSV_MaskInputRejected);
             // 
-            // btnThoat
+            // label6
             // 
-            this.btnThoat.Location = new System.Drawing.Point(618, 183);
-            this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(93, 23);
-            this.btnThoat.TabIndex = 12;
-            this.btnThoat.Text = "Thoát";
-            this.btnThoat.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 160);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Hình";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(397, 128);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(70, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Số điện thoại";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(397, 92);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(25, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Lớp";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(397, 59);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(28, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Phái";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(397, 29);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Ngày sinh";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Địa chỉ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 92);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Email";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Họ và tên";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "MSSV";
             // 
             // grbDSSV
             // 
@@ -416,20 +419,32 @@ namespace lab4_WF_2212387
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "FIle GIF|*.Jpg";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(161, 212);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // frmChinh
             // 
             this.ClientSize = new System.Drawing.Size(924, 508);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.grbDSSV);
             this.Controls.Add(this.grbThongTin);
-            this.Controls.Add(this.panel1);
             this.Name = "frmChinh";
             this.Text = "Quản lý thông tin khoa CNTT";
             this.Load += new System.EventHandler(this.frmChinh_Load);
             this.grbThongTin.ResumeLayout(false);
             this.grbThongTin.PerformLayout();
             this.grbDSSV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -449,30 +464,77 @@ namespace lab4_WF_2212387
             MessageBox.Show("Mã sinh viên phải gồm 7 ký tự số.", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void btnChonHinh_Click(object sender, System.EventArgs e)
+        private void btnChonHinh_Click(object sender, EventArgs e)
         {
-    /*        OpenFileDialog openFileDialog = new OpenFileDialog();
+            // Tạo hộp thoại chọn tệp
+            OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            // Kiểm tra nếu người dùng chọn tệp
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    txtHinh.Text = openFileDialog.FileName;
-                    pictureBox.Image = Image.FromFile(openFileDialog.FileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred while loading the image: " + ex.Message);
-                }
-            }*/
+                // Lưu đường dẫn hình ảnh vào TextBox
+                txtHinh.Text = openFileDialog.FileName;
+
+                // Hiển thị hình ảnh trong PictureBox
+                pictureBox1.Image = Image.FromFile(openFileDialog.FileName);
+            }
         }
 
         private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
+           
+        }
+
+
+
+        private void txtHinh_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnMacDinh_Click(object sender, EventArgs e)
+        {
+            txtHinh.Text = string.Empty;
+            pictureBox1.Image = null;
+            mtbMSSV.Text = string.Empty;
+            txtHoVaTen.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtDiaChi.Text = string.Empty;
+            dtpNgaySinh.Text = string.Empty;
+            cbLop.Text = string.Empty;
+            mtbSDT.Text = string.Empty;
+        }
+
+        private void txtHoVaTen_TextChanged(object sender, EventArgs e)
+        {
 
         }
 
-        private void txtHinh_TextChanged(object sender, EventArgs e)
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDiaChi_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpNgaySinh_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbLop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mtbSDT_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
         }
